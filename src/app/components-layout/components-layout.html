@@ -1,0 +1,25 @@
+<mat-sidenav-container class="app-shell">
+  <mat-sidenav class="app-sidenav" mode="side" opened>
+    <div class="sidenav-heading">Examples</div>
+    <mat-nav-list aria-label="Component examples">
+      @for (item of navigationItems; track item.path) {
+        <a
+          mat-list-item
+          [routerLink]="item.path"
+          routerLinkActive="active-link"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <mat-icon matListItemIcon aria-hidden="true">{{ item.icon }}</mat-icon>
+          <span matListItemTitle>{{ item.label }}</span>
+        </a>
+      }
+    </mat-nav-list>
+  </mat-sidenav>
+ 
+  <mat-sidenav-content class="page-content">
+    <main class="route-content">
+      <router-outlet></router-outlet>
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+ 

@@ -1,12 +1,13 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { AngularLogo } from './shared/angular-logo';
+ 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [AngularLogo, RouterLink, RouterLinkActive, RouterOutlet],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './app.html',
-  styleUrl: './app.scss'
+  styleUrl: './app.scss',
 })
 export class App {
-  protected readonly title = signal('angular21-practical-tasks');
 }

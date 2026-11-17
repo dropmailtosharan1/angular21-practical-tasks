@@ -1,0 +1,49 @@
+<section class="faq">
+  <header class="faq__header">
+    <p class="faq__eyebrow">Support Center</p>
+    <h2 class="faq__title">Frequently Asked Questions</h2>
+    <p class="faq__subtitle">
+      Everything you need to know about the platform. Navigate with
+      <kbd>Tab</kbd> and toggle with <kbd>Enter</kbd> or <kbd>Space</kbd>.
+    </p>
+  </header>
+ 
+  <!-- `cdkAccordion` is the headless root that coordinates expansion state. -->
+  <div class="faq__list" cdkAccordion [multi]="multiExpandable()">
+    @for (faq of faqs(); track faq.id) {
+      <div class="faq__item" cdkAccordionItem #item="cdkAccordionItem">
+        <h3 class="faq__heading">
+          <button
+            type="button"
+            class="faq__trigger"
+            matRipple
+            [id]="faq.id + '-trigger'"
+            [attr.aria-expanded]="item.expanded"
+            [attr.aria-controls]="faq.id + '-panel'"
+            (click)="item.toggle()"
+          >
+            <span class="faq__lead" aria-hidden="true">
+              <mat-icon>{{ faq.icon }}</mat-icon>
+            </span>
+            <span class="faq__question">{{ faq.question }}</span>
+            <mat-icon class="faq__icon" aria-hidden="true">expand_more</mat-icon>
+          </button>
+        </h3>
+ 
+        @if (item.expanded) {
+          <div
+            class="faq__panel"
+            role="region"
+            [id]="faq.id + '-panel'"
+            [attr.aria-labelledby]="faq.id + '-trigger'"
+          >
+            <div class="faq__answer">
+              <p>{{ faq.answer }}</p>
+            </div>
+          </div>
+        }
+      </div>
+    }
+  </div>
+</section>
+ 

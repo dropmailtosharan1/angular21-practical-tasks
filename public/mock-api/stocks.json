@@ -1,0 +1,9 @@
+[
+  { "symbol": "AAPL", "name": "Apple Inc.", "price": 189.42 },
+  { "symbol": "MSFT", "name": "Microsoft Corp.", "price": 421.15 },
+  { "symbol": "GOOG", "name": "Alphabet Inc.", "price": 172.88 },
+  { "symbol": "AMZN", "name": "Amazon.com Inc.", "price": 183.3 },
+  { "symbol": "TSLA", "name": "Tesla Inc.", "price": 247.6 },
+  { "symbol": "NVDA", "name": "NVIDIA Corp.", "price": 903.7 }
+]
+ 

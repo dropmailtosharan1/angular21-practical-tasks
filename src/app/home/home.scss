@@ -1,0 +1,60 @@
+:host {
+  display: block;
+}
+ 
+.hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 56px - 88px);
+  overflow: hidden;
+  background: #d8e2fd;
+  color: #0a4a97;
+  text-align: center;
+}
+ 
+.hero-mark {
+  --logo-size: min(45vw, 560px);
+  position: absolute;
+  top: 12%;
+  right: -2%;
+  color: #c3cfe8;
+}
+ 
+.hero-content {
+  position: relative;
+  padding: 48px 24px;
+}
+ 
+h1 {
+  margin: 0;
+  font-size: clamp(44px, 8vw, 84px);
+  font-weight: 500;
+  line-height: 1.1;
+}
+ 
+p {
+  margin: 20px 0 64px;
+  font-size: clamp(18px, 2.4vw, 28px);
+  font-weight: 300;
+  color: #0b4f9f;
+}
+ 
+.get-started {
+  display: inline-block;
+  padding: 16px 36px;
+  border-radius: 30px;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(20, 40, 90, 0.3);
+  color: #0b5cc0;
+  font-size: 20px;
+  font-weight: 500;
+  text-decoration: none;
+}
+ 
+.get-started:hover,
+.get-started:focus-visible {
+  box-shadow: 0 4px 12px rgba(20, 40, 90, 0.35);
+}
+ 

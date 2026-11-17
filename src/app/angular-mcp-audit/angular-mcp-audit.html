@@ -1,0 +1,123 @@
+<section class="audit-page">
+  <header class="page-header">
+    <p class="eyebrow">Angular 21 · Upgrade blueprint</p>
+    <h1>Angular MCP zoneless audit</h1>
+    <p class="intro">
+      The official Angular MCP server mapped this Angular 21 workspace and checked framework
+      guidance. The zoneless scan returned no actionable migration steps for <code>src/app</code>.
+    </p>
+    <p class="audit-status" role="status">
+      <mat-icon aria-hidden="true">task_alt</mat-icon>
+      Read-only MCP audit completed. The notes below distinguish tool results from manual code
+      review; no component refactor is claimed by the scan.
+    </p>
+  </header>
+ 
+  <section class="panel" aria-labelledby="workflow-heading">
+    <h2 id="workflow-heading">Audit workflow</h2>
+    <ol class="workflow">
+      <li>
+        <span class="step-number">1</span>
+        <div>
+          <h3>Workspace mapped</h3>
+          <p>
+            <code>list_projects</code> confirmed the <code>projects</code> workspace and Angular 21.
+          </p>
+        </div>
+      </li>
+      <li>
+        <span class="step-number">2</span>
+        <div>
+          <h3>Angular guidance checked</h3>
+          <p><code>get_best_practices</code> was run for current framework guidance.</p>
+        </div>
+      </li>
+      <li>
+        <span class="step-number">3</span>
+        <div>
+          <h3>Zoneless scan reviewed</h3>
+          <p>
+            <code>onpush_zoneless_migration</code> returned no actionable migration steps for
+            <code>src/app</code>.
+          </p>
+        </div>
+      </li>
+    </ol>
+  </section>
+ 
+  <section class="panel" aria-labelledby="baseline-heading">
+    <h2 id="baseline-heading">Current codebase baseline</h2>
+    <div class="baseline-grid">
+      <article class="baseline-card">
+        <mat-icon aria-hidden="true">check_circle</mat-icon>
+        <h3>Zoneless is configured</h3>
+        <p>
+          <code>app.config.ts</code> already provides
+          <code>provideZonelessChangeDetection()</code>.
+        </p>
+      </article>
+      <article class="baseline-card">
+        <mat-icon aria-hidden="true">check_circle</mat-icon>
+        <h3>OnPush is in use; state patterns vary</h3>
+        <p>
+          Stock Ticker and FAQ use signals, and Shopping Cart uses a signal-backed service. User
+          Registration still uses Reactive Forms for its control state.
+        </p>
+      </article>
+      <article class="baseline-card review-card">
+        <mat-icon aria-hidden="true">fact_check</mat-icon>
+        <h3>Manual follow-up: User Registration</h3>
+        <p>
+          Verify that pending and error feedback updates after the asynchronous username validator
+          completes. The scan did not request a Signals rewrite.
+        </p>
+      </article>
+    </div>
+  </section>
+ 
+  <section class="panel" aria-labelledby="blueprint-heading">
+    <h2 id="blueprint-heading">Migration blueprint</h2>
+    <ol class="workflow">
+      <li>
+        <span class="step-number">1</span>
+        <div>
+          <h3>Keep the existing zoneless provider</h3>
+          <p>
+            <code>app.config.ts</code> already calls <code>provideZonelessChangeDetection()</code>;
+            do not add a blanket Zone.js migration.
+          </p>
+        </div>
+      </li>
+      <li>
+        <span class="step-number">2</span>
+        <div>
+          <h3>Verify async form feedback</h3>
+          <p>
+            In User Registration, confirm the username pending state and validation result render
+            after the async validator completes.
+          </p>
+        </div>
+      </li>
+      <li>
+        <span class="step-number">3</span>
+        <div>
+          <h3>Change state only if verification exposes a gap</h3>
+          <p>
+            No component-specific Signals refactor was returned by the scan. If form feedback does
+            not update, address that integration and rerun the audit before broad changes.
+          </p>
+        </div>
+      </li>
+    </ol>
+  </section>
+ 
+  <aside class="next-step">
+    <mat-icon aria-hidden="true">assignment</mat-icon>
+    <p>
+      <strong>Next step:</strong> restart the Angular MCP server from VS Code after configuration,
+      then rerun the scan if the app changes. Its workspace configuration is
+      <code>.vscode/mcp.json</code> and is read-only.
+    </p>
+  </aside>
+</section>
+ 

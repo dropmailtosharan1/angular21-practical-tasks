@@ -1,0 +1,166 @@
+:host {
+  display: block;
+}
+ 
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  height: 56px;
+  padding: 0 32px;
+  background: #d8e2fd;
+  color: #0b5cc0;
+  font-weight: 500;
+}
+ 
+.header-nav,
+.header-actions {
+  display: flex;
+  align-items: center;
+}
+ 
+.header-nav {
+  gap: 8px;
+}
+ 
+.header-actions {
+  gap: 20px;
+}
+ 
+.brand,
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  color: inherit;
+  font-size: 15px;
+  text-decoration: none;
+}
+ 
+.brand {
+  --logo-size: 24px;
+  padding-left: 0;
+  margin-right: 8px;
+}
+ 
+.nav-link:hover,
+.nav-link.active {
+  background: #c5d6f7;
+}
+ 
+.github {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: inherit;
+  font-size: 15px;
+  text-decoration: none;
+}
+ 
+.github svg {
+  width: 28px;
+  height: 28px;
+  fill: currentColor;
+}
+ 
+.app-footer {
+  display: flex;
+  min-height: 88px;
+  box-sizing: border-box;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  background: #f8f8fc;
+  border-top: 1px solid #e0e1e7;
+  color: #292b30;
+}
+ 
+.footer-brand {
+  --logo-size: 40px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 16px 32px;
+  color: #4a4d55;
+  font-size: 18px;
+  text-decoration: none;
+}
+ 
+.footer-brand:hover span,
+.footer-brand:focus-visible span {
+  text-decoration: underline;
+}
+ 
+.footer-brand app-angular-logo {
+  color: #202127;
+}
+ 
+.footer-legal {
+  padding: 12px 32px;
+  color: #454851;
+  font-size: 13px;
+  line-height: 1.4;
+  text-align: right;
+}
+ 
+@media (max-width: 960px) {
+  .app-header {
+    height: 52px;
+    padding: 0 12px;
+  }
+ 
+  .brand,
+  .nav-link {
+    padding: 6px 10px;
+    font-size: 14px;
+  }
+ 
+  .brand {
+    margin-right: 0;
+  }
+ 
+  .github span {
+    display: none;
+  }
+ 
+  .header-actions {
+    gap: 4px;
+  }
+}
+ 
+@media (max-width: 700px) {
+  .app-footer {
+    min-height: 76px;
+  }
+ 
+  .footer-brand {
+    --logo-size: 32px;
+    gap: 12px;
+    padding: 12px 16px;
+    font-size: 16px;
+  }
+ 
+  .footer-legal {
+    padding: 12px 16px;
+    font-size: 11px;
+  }
+}
+ 
+@media (max-width: 480px) {
+  .app-footer {
+    align-items: stretch;
+    flex-direction: column;
+  }
+ 
+  .footer-brand {
+    border-bottom: 1px solid #d2d3da;
+  }
+ 
+  .footer-legal {
+    text-align: left;
+  }
+}
+ 

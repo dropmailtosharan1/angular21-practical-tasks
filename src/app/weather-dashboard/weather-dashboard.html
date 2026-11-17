@@ -1,0 +1,65 @@
+<section class="dashboard" aria-labelledby="weather-heading">
+  <h1 id="weather-heading">Real-Time Weather Query Dashboard</h1>
+  <p class="subtitle">
+    Reactive requests with httpResource. Simulated weather, not a live forecast.
+    Select Offline to try the error state.
+  </p>
+ 
+  <div class="controls">
+    <mat-form-field appearance="outline">
+      <mat-label>City</mat-label>
+      <mat-select [value]="city()" (selectionChange)="city.set($event.value)">
+        @for (name of cities; track name) {
+          <mat-option [value]="name">{{ name }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+    <button
+      mat-flat-button
+      type="button"
+      (click)="weather.reload()"
+      [disabled]="weather.isLoading()"
+    >
+      <mat-icon aria-hidden="true">refresh</mat-icon>
+      Refresh Data
+    </button>
+  </div>
+ 
+  <p class="resource-status" role="status">Resource status: {{ weather.status() }}</p>
+ 
+  <mat-card appearance="outlined" [attr.aria-busy]="weather.isLoading()">
+    <mat-card-content>
+      @if (weather.isLoading()) {
+        <div class="loading" role="status">
+          <mat-spinner diameter="32" aria-label="Loading weather" />
+          <span>Fetching weather for {{ city() }}...</span>
+        </div>
+      }
+ 
+      @if (weather.error(); as error) {
+        <p class="error-badge" role="alert">
+          <mat-icon aria-hidden="true">error_outline</mat-icon>
+          {{ error.message }} Select another city or use Refresh Data to retry.
+        </p>
+      }
+ 
+      @if (weather.hasValue()) {
+        @let data = weather.value();
+        <div class="weather-data">
+          <h2>{{ data.city }}</h2>
+          <p class="temperature">{{ data.temperatureC | number: '1.1-1' }} &deg;C</p>
+          <p>{{ data.condition }}</p>
+          <dl>
+            <div><dt>Humidity</dt><dd>{{ data.humidity }}%</dd></div>
+            <div><dt>Wind</dt><dd>{{ data.windKph }} km/h</dd></div>
+          </dl>
+          <p class="updated">Updated: {{ data.updatedAt | date: 'medium' }}</p>
+          @if (weather.isLoading()) {
+            <p>Showing the previous reading while refreshing.</p>
+          }
+        </div>
+      }
+    </mat-card-content>
+  </mat-card>
+</section>
+ 

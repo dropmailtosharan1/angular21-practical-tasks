@@ -1,0 +1,228 @@
+:host {
+  display: block;
+  // Angular Material (M3) system tokens provided by `mat.theme` in styles.scss.
+  --faq-bg: var(--mat-sys-surface);
+  --faq-surface: var(--mat-sys-surface-container-low);
+  --faq-border: var(--mat-sys-outline-variant);
+  --faq-text: var(--mat-sys-on-surface);
+  --faq-muted: var(--mat-sys-on-surface-variant);
+  --faq-accent: var(--mat-sys-primary);
+  --faq-accent-soft: var(--mat-sys-primary-container);
+  --faq-radius: 20px;
+  --faq-shadow: var(--mat-sys-level3);
+ 
+  font-family: var(--mat-sys-body-large-font, Roboto), 'Helvetica Neue', sans-serif;
+  color: var(--faq-text);
+}
+ 
+.faq {
+  position: relative;
+  overflow: hidden;
+  max-width: 760px;
+  margin: 3rem auto;
+  padding: 2.5rem;
+  background:
+    radial-gradient(circle at 0% 0%, var(--mat-sys-tertiary-container) 0, transparent 38%),
+    radial-gradient(circle at 100% 100%, var(--mat-sys-primary-container) 0, transparent 42%),
+    var(--faq-bg);
+  border: 1px solid var(--faq-border);
+  border-radius: 36px 12px 36px 12px;
+  box-shadow: var(--faq-shadow);
+ 
+  &__header {
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+ 
+  &__eyebrow {
+    display: inline-block;
+    margin: 0 0 0.75rem;
+    padding: 0.3rem 0.9rem;
+    font: var(--mat-sys-label-large);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--mat-sys-on-tertiary-container);
+    background: var(--mat-sys-tertiary-container);
+    border-radius: 999px;
+  }
+ 
+  &__title {
+    margin: 0 0 0.75rem;
+    font: var(--mat-sys-headline-large);
+    font-weight: 700;
+    background: linear-gradient(90deg, var(--mat-sys-primary), var(--mat-sys-tertiary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+ 
+  &__subtitle {
+    margin: 0 auto;
+    max-width: 48ch;
+    color: var(--faq-muted);
+    line-height: 1.6;
+ 
+    kbd {
+      display: inline-block;
+      padding: 0.1em 0.45em;
+      margin: 0 0.1em;
+      font-size: 0.78em;
+      font-family: inherit;
+      color: var(--faq-text);
+      background: var(--faq-surface);
+      border: 1px solid var(--faq-border);
+      border-bottom-width: 2px;
+      border-radius: 6px;
+    }
+  }
+ 
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+ 
+  &__item {
+    --item-color: var(--mat-sys-primary);
+    --item-on: var(--mat-sys-on-primary);
+    --item-container: var(--mat-sys-primary-container);
+ 
+    overflow: hidden;
+    background: var(--faq-surface);
+    border: 1px solid var(--faq-border);
+    border-left: 6px solid var(--item-color);
+    border-radius: var(--faq-radius) 8px var(--faq-radius) 8px;
+    transition:
+      background 0.25s ease,
+      box-shadow 0.25s ease,
+      transform 0.25s ease;
+ 
+    // Each item gets its own Material colour role for a playful, varied look.
+    &:nth-child(4n + 2) {
+      --item-color: var(--mat-sys-tertiary);
+      --item-on: var(--mat-sys-on-tertiary);
+      --item-container: var(--mat-sys-tertiary-container);
+      border-radius: 8px var(--faq-radius) 8px var(--faq-radius);
+    }
+ 
+    &:nth-child(4n + 3) {
+      --item-color: var(--mat-sys-secondary);
+      --item-on: var(--mat-sys-on-secondary);
+      --item-container: var(--mat-sys-secondary-container);
+    }
+ 
+    &:nth-child(4n) {
+      --item-color: var(--mat-sys-error);
+      --item-on: var(--mat-sys-on-error);
+      --item-container: var(--mat-sys-error-container);
+      border-radius: 8px var(--faq-radius) 8px var(--faq-radius);
+    }
+ 
+    &:hover {
+      transform: translateX(4px);
+      box-shadow: var(--mat-sys-level1);
+    }
+ 
+    // Highlight the item whose trigger is expanded.
+    &:has(.faq__trigger[aria-expanded='true']) {
+      background: var(--item-container);
+      box-shadow: var(--mat-sys-level2);
+    }
+  }
+ 
+  &__heading {
+    margin: 0;
+    font: inherit;
+  }
+ 
+  &__trigger {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    padding: 1rem 1.25rem;
+    font: var(--mat-sys-title-medium);
+    text-align: left;
+    color: var(--faq-text);
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+ 
+    &:focus-visible {
+      outline: 3px solid var(--item-color);
+      outline-offset: -3px;
+    }
+ 
+    &[aria-expanded='true'] {
+      color: var(--item-color);
+    }
+  }
+ 
+  &__lead {
+    display: grid;
+    flex: 0 0 auto;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    color: var(--item-color);
+    background: var(--item-container);
+    border-radius: 50%;
+    transition:
+      background 0.25s ease,
+      color 0.25s ease,
+      transform 0.25s ease;
+  }
+ 
+  &__trigger[aria-expanded='true'] &__lead {
+    color: var(--item-on);
+    background: var(--item-color);
+    transform: rotate(-8deg) scale(1.08);
+  }
+ 
+  &__question {
+    flex: 1;
+  }
+ 
+  &__icon {
+    flex: 0 0 auto;
+    transition: transform 0.3s ease;
+  }
+ 
+  &__trigger[aria-expanded='true'] &__icon {
+    transform: rotate(180deg);
+  }
+ 
+  &__answer {
+    padding: 0 1.5rem 1.25rem calc(1.25rem + 40px + 1rem);
+    font: var(--mat-sys-body-large);
+    color: var(--mat-sys-on-surface-variant);
+    animation: faq-reveal 0.25s ease both;
+ 
+    p {
+      margin: 0;
+    }
+  }
+}
+ 
+@keyframes faq-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+ 
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+ 
+@media (prefers-reduced-motion: reduce) {
+  .faq *,
+  .faq *::before,
+  .faq *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+ 

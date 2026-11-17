@@ -1,0 +1,92 @@
+<mat-toolbar class="hero">
+  <mat-icon>candlestick_chart</mat-icon>
+  <span class="title">Stock Ticker Dashboard</span>
+  <span class="spacer"></span>
+  <mat-chip-set aria-label="Stream info">
+    <mat-chip highlighted>Stream updates: {{ updateCount() }}</mat-chip>
+  </mat-chip-set>
+</mat-toolbar>
+ 
+<section class="ticker">
+  <p class="subtitle">Zoneless change detection &middot; signals &middot; 500ms stream</p>
+ 
+  <mat-card appearance="outlined" class="card">
+    <mat-card-header>
+      <mat-card-title>Live Market</mat-card-title>
+      <mat-card-subtitle role="status" [class.error]="status() === 'error'">
+        @switch (status()) {
+          @case ('loading') { Loading snapshot&hellip; }
+          @case ('loaded') { Snapshot loaded at {{ lastLoaded() | date: 'mediumTime' }} }
+          @case ('error') { Failed to load snapshot }
+          @default { Waiting for browser&hellip; }
+        }
+      </mat-card-subtitle>
+    </mat-card-header>
+ 
+    <mat-card-actions>
+      <button mat-flat-button type="button" (click)="loadSnapshot()" [disabled]="status() === 'loading'">
+        <mat-icon>refresh</mat-icon>
+        Reload from mock API
+      </button>
+    </mat-card-actions>
+ 
+    @if (status() === 'loading') {
+      <mat-progress-bar mode="indeterminate" />
+    }
+ 
+    <mat-card-content>
+  @if (hasData()) {
+    <table mat-table [dataSource]="rows()" class="table">
+      <ng-container matColumnDef="symbol">
+        <th mat-header-cell *matHeaderCellDef>Symbol</th>
+        <td mat-cell *matCellDef="let row" class="symbol">{{ row.symbol }}</td>
+      </ng-container>
+ 
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let row">{{ row.name }}</td>
+      </ng-container>
+ 
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef class="num">Price</th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          class="num"
+          [class.up]="direction(row) === 'up'"
+          [class.down]="direction(row) === 'down'"
+        >
+          {{ row.price | number: '1.2-2' }}
+        </td>
+      </ng-container>
+ 
+      <ng-container matColumnDef="change">
+        <th mat-header-cell *matHeaderCellDef class="num">Change</th>
+        <td mat-cell *matCellDef="let row" class="num">
+          <span
+            class="badge"
+            [class.up]="direction(row) === 'up'"
+            [class.down]="direction(row) === 'down'"
+          >
+            <mat-icon class="arrow">{{
+              direction(row) === 'up'
+                ? 'arrow_upward'
+                : direction(row) === 'down'
+                  ? 'arrow_downward'
+                  : 'remove'
+            }}</mat-icon>
+            {{ row.price - row.previous | number: '1.2-2' }}
+          </span>
+        </td>
+      </ng-container>
+ 
+      <tr mat-header-row *matHeaderRowDef="columns"></tr>
+      <tr mat-row *matRowDef="let row; columns: columns"></tr>
+    </table>
+  } @else {
+    <p class="empty">No data yet.</p>
+  }
+    </mat-card-content>
+  </mat-card>
+</section>
+ 

@@ -1,0 +1,52 @@
+:host {
+  display: block;
+}
+ 
+.app-shell {
+  min-height: calc(100vh - 56px - 88px);
+  background: #f8f8fc;
+}
+ 
+.app-sidenav {
+  width: 280px;
+  padding: 20px 12px;
+  border-right: 1px solid #d2d3da;
+  border-radius: 0;
+  background: #f8f8fc;
+}
+ 
+.sidenav-heading {
+  padding: 8px 16px 14px;
+  color: #666b75;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+ 
+.app-sidenav a {
+  min-height: 56px;
+  margin-bottom: 4px;
+  border-radius: 30px;
+  color: #272a30;
+}
+ 
+.app-sidenav a.active-link {
+  color: #0756a5;
+  background: #dce6fc;
+}
+ 
+.route-content {
+  padding: 28px clamp(20px, 5vw, 64px);
+}
+ 
+@media (max-width: 700px) {
+  .app-sidenav {
+    width: 210px;
+  }
+ 
+  .route-content {
+    padding: 20px 16px;
+  }
+}
+ 
